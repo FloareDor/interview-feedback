@@ -7,9 +7,11 @@ from app.database import create_tables
 def get_application():
     _app = FastAPI(title=settings.PROJECT_NAME)
 
+    origins = ["*"]
+
     _app.add_middleware(
         CORSMiddleware,
-        allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+        allow_origins=origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

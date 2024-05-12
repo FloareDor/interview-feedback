@@ -12,7 +12,7 @@ from sqlalchemy.exc import IntegrityError
 
 router = APIRouter()
 
-@router.post("/sign-up", response_model=UserResponse)
+@router.post("/signup", response_model=UserResponse)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # Hash the password
     hashed_password = pwd_context.hash(user.password)

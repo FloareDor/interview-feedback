@@ -11,7 +11,7 @@ class Interview(Base):
     id = Column(Integer, primary_key=True, index=True)
     interviewer_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     page_id = Column(Integer)
-    interviewee_id = Column(UUID(as_uuid=True), default=uuid.uuid4, unique=True, nullable=False)
+    # interviewee_id = Column(UUID(as_uuid=True), default=uuid.uuid4, unique=True, nullable=False)
     interviewee_name = Column(String)
     status = Column(String)
     feedback = Column(String)
@@ -26,13 +26,13 @@ class InterviewCreate(BaseModel):
     status: str
     feedback: str
     rating: int
-    interviewee_id: uuid.UUID = uuid.uuid4()
+    # interviewee_id: uuid.UUID = uuid.uuid4()
 
 class InterviewUpdate(BaseModel):
     id: int
     page_id: int | None = None
     interviewee_name: str | None = None
-    interviewee_id: uuid.UUID | None = None
+    # interviewee_id: uuid.UUID | None = None
     status: str | None = None
     feedback: str | None = None
     rating: int | None = None
@@ -41,7 +41,7 @@ class InterviewResponse(BaseModel):
     id: int
     page_id: int
     interviewee_name: str
-    interviewee_id: uuid.UUID
+    # interviewee_id: uuid.UUID
     status: str
     feedback: str
     rating: int
