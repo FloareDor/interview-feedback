@@ -7,9 +7,20 @@ from app.models.user import User
 from app.database import get_db
 from sqlalchemy.orm import Session
 
-SECRET_KEY = "your-secret-key"
+from os import environ as env
+from dotenv import find_dotenv, load_dotenv
+
+ENV_FILE = find_dotenv()
+if ENV_FILE:	
+	load_dotenv(ENV_FILE)
+
+
+SECRET_KEY = env.get('SECRET_KEY')
+ACCESS_TOKEN_EXPIRE_MINUTES = env.get('ACCESS_TOKEN_EXPIRE_MINUTES')
+
+# SECRET_KEY = "your-secret-key"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+# ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
