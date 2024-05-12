@@ -10,7 +10,7 @@ class Interview(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     interviewer_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    page_id = Column(Integer)
+    page_id = Column(String)
     # interviewee_id = Column(UUID(as_uuid=True), default=uuid.uuid4, unique=True, nullable=False)
     interviewee_name = Column(String)
     status = Column(String)
@@ -21,7 +21,7 @@ class Interview(Base):
     interviewer = relationship("User", back_populates="interviews_conducted")
 
 class InterviewCreate(BaseModel):
-    page_id: int
+    page_id: str
     interviewee_name: str
     status: str
     feedback: str
@@ -30,7 +30,7 @@ class InterviewCreate(BaseModel):
 
 class InterviewUpdate(BaseModel):
     id: int
-    page_id: int | None = None
+    page_id: str | None = None
     interviewee_name: str | None = None
     # interviewee_id: uuid.UUID | None = None
     status: str | None = None
@@ -39,7 +39,7 @@ class InterviewUpdate(BaseModel):
 
 class InterviewResponse(BaseModel):
     id: int
-    page_id: int
+    page_id: str
     interviewee_name: str
     # interviewee_id: uuid.UUID
     status: str

@@ -9,14 +9,6 @@ from app.models.user import User
 
 router = APIRouter()
 
-# @router.post("/add-interview", response_model=InterviewResponse)
-# def create_interview(interview: InterviewCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-#     db_interview = Interview(**interview.dict())
-#     db.add(db_interview)
-#     db.commit()
-#     db.refresh(db_interview)
-#     return db_interview
-
 @router.post("/add-interview", response_model=InterviewResponse)
 def create_interview(interview: InterviewCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     user_id = current_user.id
@@ -51,10 +43,17 @@ def delete_interview(interview: InterviewUpdate, db: Session = Depends(get_db), 
     return {"message": "Interview deleted successfully"}
 
 @router.get("/get-all-interviews/{page_id}", response_model=List[InterviewResponse])
-def get_interviews(page_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def get_interviews(page_id: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     user_id = current_user.id  # Get the user_id from the authenticated user object
     print(user_id, page_id)
     interviews = db.query(Interview).filter(Interview.page_id == page_id, Interview.interviewer_id == user_id).all()
+    return interviews
+
+@router.get("/get-all-interviews", response_model=List[InterviewResponse])
+def get_all_interviews(page_id: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    user_id = current_user.id  # Get the user_id from the authenticated user object
+    print(user_id, page_id)
+    interviews = db.query(Interview).filter(Interview.interviewer_id == user_id).all()
     return interviews
 
 @router.get("/get-interview/{interview_id}", response_model=InterviewResponse)

@@ -36,8 +36,9 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
     return db_user
 
-@router.get("/users/{user_id}")
-def get_user(user_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+@router.get("/profile")
+def get_user(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    user_id = current_user.id
     # Retrieve a user from the database by ID
     user = db.query(User).filter(User.id == user_id).first()
     return user
