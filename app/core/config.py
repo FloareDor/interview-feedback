@@ -33,8 +33,8 @@ class Settings(BaseSettings):
             username=values.get("POSTGRES_USER"),
             password=values.get("POSTGRES_PASSWORD"),
             host=values.get("POSTGRES_SERVER"),
-            path=f"/{values.get('POSTGRES_DB') or ''}",
-            port=values.get("POSTGRES_PORT", 5432),
+            path=f"{values.get('POSTGRES_DB') or 'defaultdb'}",
+            port=values.get("POSTGRES_PORT", 25060),
         ).unicode_string()
     
 
