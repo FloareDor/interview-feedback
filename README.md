@@ -1,6 +1,6 @@
 # backend
 
-This is the backend for interview feedback site.
+This is the backend for the interview feedback site.
 
 ## License
 
