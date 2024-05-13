@@ -1,6 +1,6 @@
 # backend
 
-This project was generated via [manage-fastapi](https://ycd.github.io/manage-fastapi/)! :tada:
+This is the backend for interview feedback site.
 
 ## License
 
